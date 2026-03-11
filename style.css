@@ -29,9 +29,8 @@ html, h1, h2, h3, h4, h5, h6, p {
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
               var(--bg-primary);
   color: var(--text-primary);
@@ -78,20 +77,61 @@ body {
 
 .main-content-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  width: 100%;
-  padding: 0 40px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
 .main-content-left,
-.main-content-autorization,
 .main-content-right {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  flex: 0 0 240px;
+  min-width: 220px;
+}
+
+.main-content-autorization {
+  flex: 0 1 420px;
+  width: min(420px, 100%);
+  min-width: 280px;
+}
+
+/* Планшет */
+@media (max-width: 1024px) {
+  .main-content-left {
+    display: none;
+  }
+  .main-content-wrapper {
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+  .main-content-autorization {
+    flex: 0 1 420px;
+  }
+  .main-content-right {
+    flex: 0 1 320px;
+    min-width: 260px;
+  }
+}
+
+/* Телефон */
+@media (max-width: 768px) {
+  .main-content-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .main-content-right,
+  .main-content-autorization {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .main-content-autorization {
+    padding: 20px 16px;
+  }
 }
 
 .main-content-left {
@@ -102,11 +142,30 @@ body {
   flex: 0 0 260px;
 }
 
-.main-content-left-side-title {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: -0.01em;
+/*Компактный режим*/
+@media (max-height: 420px) {
+  .header {
+    padding: 8px 12px;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+  .title-text {
+    font-size: 0.8rem;
+    margin-top: 2px;
+  }
+  .main-content {
+    align-items: flex-start;
+    padding-bottom: 8px;
+  }
+  .main-content-autorization,
+  .main-content-right {
+    padding: 12px;
+  }
+  .main-content-autorization input,
+  .main-content-autorization button {
+    padding: 10px 12px;
+  }
 }
 
 .main-content-left-side-text {
@@ -120,9 +179,10 @@ body {
   flex-direction: column;
   gap: 20px;
   padding: 40px 36px;
-  min-width: 320px;
-  justify-content: center;
-  align-items: stretch;
+  width: 100%;
+  max-width: 420px;
+  min-width: 280px;
+  flex: 1 1 420px;
 }
 
 .main-content-autorization input {
